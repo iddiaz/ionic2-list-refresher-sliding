@@ -1,11 +1,46 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="primary">
     <ion-title>
-      SOnidos App
+      Sonidos App
     </ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content>
+  
+ <ion-list>  
+
+  <ion-item-sliding *ngFor="let animal of animales; let i = index" >
+    
+    <ion-item (click)="reproducir(animal)">
+      <ion-avatar item-left>
+        <img [src]="animal.imagen">
+      </ion-avatar>
+      <h2>{{animal.nombre}}</h2>
+      <!--<p>Ugh. As if.</p>-->
+       <ion-icon name="play" item-right *ngIf="!animal.reproduciendo"></ion-icon>
+       <ion-icon name="pause" item-right *ngIf="animal.reproduciendo"></ion-icon>
+    </ion-item>
+
+     <!--<ion-item-options side="left">
+      <button ion-button color="primary">
+        <ion-icon name="text"></ion-icon>
+        Text
+      </button>
+      <button ion-button color="secondary">
+        <ion-icon name="call"></ion-icon>
+        Call
+      </button>
+    </ion-item-options>-->
+    <ion-item-options side="right">
+      <button ion-button color="danger" (click)="borrarAnimal( i )">
+        <ion-icon name="trash"></ion-icon>
+        Borrar
+      </button>
+    </ion-item-options>
+
+  </ion-item-sliding>
+
+</ion-list>
 
 </ion-content>
