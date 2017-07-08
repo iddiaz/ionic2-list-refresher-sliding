@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 
 import { ANIMALES } from './../../data/data.animales';
 import { Animal } from './../../interfaces/animal.interface';
+import {Refresher} from 'ionic-angular';
 
 
 @Component({
@@ -15,7 +16,8 @@ export class HomePage {
   audioTiempo: any;
 
   constructor() {
-    this.animales = ANIMALES.splice(0); //clonamos el objeto de referencia para no sobreescribirlo
+    this.animales = ANIMALES.slice(0); //clonamos el objeto de referencia para no sobreescribirlo
+    
   }
 
   reproducir( animal: Animal ){
@@ -52,6 +54,24 @@ export class HomePage {
 
   borrarAnimal(idx:number){
     this.animales.splice(idx, 1);
+  }
+
+
+  /**
+   * @description Función en documentación oficial,
+   * recarga y actualiza la lista de animales
+   * 
+   * @param {*} refresher 
+   * @memberof HomePage
+   */
+  recargarAnimales( refresher: Refresher ) {
+    console.log('inicio del refresh');
+    setTimeout(()=>{
+      console.log('termino el refresh');
+       this.animales = ANIMALES.slice(0);
+
+       refresher.complete();
+    }, 1500);
   }
 
 }
